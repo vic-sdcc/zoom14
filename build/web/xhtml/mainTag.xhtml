@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:prcc="http://java.sun.com/jsf/composite/prcomponents"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="top">
+            #{bundle.Tag}
+        </ui:define>
+        <ui:define id="addContent" name="content">
+            <h:form id="addForm">
+                <f:event type="preRenderView" listener="#{tagBean.init}"/>
+                <prcc:dataTableTagUtilForm canNotInput="false"/>
+
+
+                <p:panel id="myTags" style="background: transparent">
+                    <ui:repeat id="tagRepeat" var="t" value="#{tagBean.tagBox}">
+                        <p:row>
+                            <h:inputText value="#{t.tagIn}" size="50"/>
+                        </p:row>
+                    </ui:repeat>
+                    <p:commandButton value="+" update="myTags" actionListener="#{tagBean.addTagBox}"/>
+                    <p:commandButton value="-" update="myTags" actionListener="#{tagBean.remTagBox}"/>
+                </p:panel>
+
+                <h:commandButton value="SAVE" action="#{tagBean.save}"/>
+                <h:commandButton value="CANCEL" action="/xhtml/mainTag.xhtml" immediate="true"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+

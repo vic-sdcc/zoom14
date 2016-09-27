@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <composite:interface>
+        <composite:attribute name="canNotInput"/>									
+    </composite:interface>
+    <composite:implementation>
+        <h:outputText value="Tag:"/>
+        <p:panel id="myTags" style="background: transparent">
+            <ui:repeat id="tagRepeat" var="t" value="#{tagBean.tagBox}">
+                <p:row>
+                    <h:inputText value="#{t.tagIn}" size="50"/>
+                    <br/>
+                </p:row>
+            </ui:repeat>
+            <br/>
+            <p:commandButton value="+" update="myTags" actionListener="#{tagBean.addTagBox}"/>
+            <p:commandButton value="-" update="myTags" actionListener="#{tagBean.remTagBox}"/>
+        </p:panel>
+        <br/>
+    </composite:implementation>
+</html>
